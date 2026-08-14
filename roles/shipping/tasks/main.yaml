@@ -1,0 +1,48 @@
+- name: install Maven 
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+  - maven
+  - mysql
+
+- name: application setup
+  import_role:
+    name: common
+    tasks_from: app-setup
+
+- name: install dependencies
+  command: mvn clean package
+  args:
+    chdir: /app
+- name: move shipping jar
+  command: mv target/shipping-1.0.jar shipping.jar 
+  args:
+    chdir: /app
+- name: install python dependencies
+  pip:
+    name: PyMySQL
+    executable: pip3.9
+- name: load mysql data
+  community.mysql.mysql_db:
+    name: all
+    state: import
+    login_user: "{{ MYSQL_USER }}"
+    login_password: "{{ MYSQL_ROOT_PASSWORD }}"
+    login_host: "{{ MYSQL_HOST }}"
+    target: "{{ item }}"
+  loop:
+  - /app/db/schema.sql
+  - /app/db/app-user.sql
+  - /app/db/master-data.sql
+
+- name: systemd setup
+  import_role:
+    name: common
+    tasks_from: systemd-setup 
+
+- name: Enable and Start the shipping service
+  service:
+    name: shipping
+    state: restarted
+    enabled: yes

@@ -1,0 +1,12 @@
+ansible_user: ec2-user
+ansible_password: DevOps321
+MONGODB_HOST: mongodb-{{ env }}-{{ env }}.amireddyravi.space
+REDIS_HOST: redis-{{ env }}.amireddyravi.space
+MYSQL_HOST: mysql-{{ env }}.amireddyravi.space
+RABBITMQ_HOST: rabbitmq-{{ env }}.amireddyravi.space
+
+CATALOGUE_HOST: catalogue-{{ env }}.amireddyravi.space
+USER_HOST: user-{{ env }}.amireddyravi.space
+CART_HOST: cart-{{ env }}.amireddyravi.space
+SHIPPING_HOST: shipping-{{ env }}.amireddyravi.space
+PAYMENT_HOST: payment-{{ env }}.amireddyravi.space
