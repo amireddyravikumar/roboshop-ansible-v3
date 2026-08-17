@@ -13,6 +13,7 @@
       name:
       - boto3
       - botocoe
+      executable: pip3.9
   - name: Start the service
     service:
       name: "mysqld"
