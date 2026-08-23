@@ -19,7 +19,7 @@
     state: directory
 - name: Download the {{ component }} code
   get_url:
-    url: "https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-${{ app_version }}.zip"
+    url: "https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-{{ app_version }}.zip"
     dest: /tmp/{{ component }}.zip
 - name: unzip local file to remote server
   unarchive:
