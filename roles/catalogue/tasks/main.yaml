@@ -19,7 +19,7 @@
     name: mongodb-mongosh
     state: present
 - name: catalogue exist or not
-  shell: mongosh --host mongodb.amireddyravi.space --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  shell: mongosh --host {{ MONGODB_HOST }} --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
   register: catalogue_output
   tags:
   - mongodb
